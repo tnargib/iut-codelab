@@ -10,7 +10,7 @@
 <link rel="canonical" href="https://example.com/">
 <link rel="preconnect" href="https://www.google-analytics.com">
 <script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date;
     ga('create', 'UA-49880327-14', 'auto');
     ga('send', 'pageview');
 </script>
@@ -19,7 +19,11 @@ window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 <link rel="stylesheet" href="/styles/main.css">
 <link rel="import" href="/elements/elements.html">
 <style is="custom-style">
-:root{--paper-tabs-selection-bar-color:currentcolor;--paper-input-container-underline:{display:none};--paper-input-container-underline-focus:{display:none};}.dropdown-filter{--paper-input-container:{padding:8px}} </style>
+:root{--paper-tabs-selection-bar-color:currentcolor;--paper-input-container-underline:{display:none}
+
+      ;--paper-input-container-underline-focus:{display:none}
+
+      ;}.dropdown-filter{--paper-input-container:{padding:8px}} </style>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#455a64">
 <meta name="apple-mobile-web-app-title" content="Codelabs">
@@ -70,12 +74,12 @@ window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
 </div>
 <header id="banner" down$="[[_toBoolean(selectedFilter)]]">
 <div class="site-width">
-<h2 class="banner-title">Welcome to Codelabs!</h2>
+<h2 class="banner-title">Ionic + Cordova + Angular!</h2>
 <div class="banner-description" data-filter-selected$="[[_toBoolean(selectedFilter)]]">
 <p class="banner-info">
-Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application.
+Dans ce Codelab vous retrouvez l'ensemble de ce que vous devez savoir sur Ionic et Cordova. Il fait à la fois office de support de cours et de rappel. Il sera absolument bourré de fautes mais on s'en fout je suis développeur. Du moment que vous vous y retrouvé c'est l'important !
 <br>
-<a href="https://github.com/googlecodelabs/tools">Codelab tools on GitHub</a>
+Bien entendu si vous avez des remarques, demandes ou autre idées dont vous voudriez me faire part pour améliorer ce support <s>gardez les et mettez vous les...</s> n'hésitez pas à m'en faire part je suis la pour ça :) Bonne lecture !
 </p>
 </div>
 </div>
@@ -95,10 +99,10 @@ Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs w
 </paper-dropdown-menu>
 </div>
 <card-sorter id="cards" class="site-width">
-<a href="/codelabs/how-to-write-a-codelab/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-web" data-category="web" data-title="How to Write a Codelab" data-duration="8" data-updated="2020-01-27T21:42:50+01:00" data-tags="medium" data-pin="">
-<div class="description">How to Write a Codelab</div>
+<a href="/codelabs/env-setup/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-web" data-category="web" data-title="Setup de l&#39;environnement" data-duration="2" data-updated="2020-01-28T00:39:11+01:00" data-tags="medium" data-pin="">
+<div class="description">Setup de l&#39;environnement</div>
 <div class="card-duration">
-<span>8 min </span>
+<span>2 min </span>
 <span>Updated Jan 27, 2020</span>
 </div>
 <div class="card-footer">
@@ -106,10 +110,10 @@ Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs w
 <paper-button class="web-bg">Start</paper-button>
 </div>
 </a>
-<a href="/codelabs/test-codelab/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-web" data-category="web" data-title="How to Write a Codelab" data-duration="8" data-updated="2020-01-27T21:42:50+01:00" data-tags="medium" data-pin="">
-<div class="description">How to Write a Codelab</div>
+<a href="/codelabs/ionic-tour/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-web" data-category="web" data-title="The Ionic tour" data-duration="0" data-updated="2020-01-28T00:48:47+01:00" data-tags="medium" data-pin="">
+<div class="description">The Ionic tour</div>
 <div class="card-duration">
-<span>8 min </span>
+<span></span>
 <span>Updated Jan 27, 2020</span>
 </div>
 <div class="card-footer">
