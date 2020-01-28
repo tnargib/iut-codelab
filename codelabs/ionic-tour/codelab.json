@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-01-28T00:48:47+01:00",
+  "id": "ionic-tour",
+  "duration": 0,
+  "title": "The Ionic tour",
+  "authors": "Simon",
+  "summary": "The Ionic tour",
+  "source": "ionic-tour.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "web"
+  ],
+  "tags": [
+    "medium"
+  ],
+  "url": "ionic-tour"
+}
