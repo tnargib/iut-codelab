@@ -18,3 +18,5 @@ app/js/bundle
 /build/
 
 .firebase/
+
+.DS_Store
