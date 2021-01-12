@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
   "updated": "2021-01-12T20:21:12+01:00",
-  "id": "ionic-tour",
+  "id": "ionic-start",
   "duration": 0,
-  "title": "The Ionic tour",
+  "title": "Démarrer une application Ionic",
   "authors": "Simon",
-  "summary": "The Ionic tour",
-  "source": "ionic-tour.md",
+  "summary": "Démarrer une appli Ionic",
+  "source": "ionic-start.md",
   "theme": "",
   "status": [
     "published"
@@ -20,5 +20,5 @@
   "tags": [
     "ionic"
   ],
-  "url": "ionic-tour"
+  "url": "ionic-start"
 }

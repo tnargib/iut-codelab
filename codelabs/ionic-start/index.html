@@ -1,0 +1,150 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Démarrer une application Ionic</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ionic-start"
+                  title="Démarrer une application Ionic"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Initialisation" duration="0">
+        <p>pour lancer un projet Ionic c&#39;est très simple. Allez dans le dossier qui vous intéresse et lancez la commande suivante.</p>
+<pre><code language="language-bash" class="language-bash">ionic start myApp blank
+</code></pre>
+<p>Si la CLI vous demande de choisir entre Angular et React, choisissez Angular. Si elle vous demande de choisir entre Capacitor et Capacitor, choisissez Capacitor.</p>
+<p>Le processus va tourner quelques instants. Créer les fichiers et installer les dépendances avec npm.</p>
+<aside class="special"><p>Ionic nous met également à disposition plusieurs templates d&#39;app initial. Par exemple: <code>ionic start myApp tabs</code></p>
+</aside>
+<p>Vous avez maintenant un projet ionic vide que vous pouvez lancer avec la commande suivante.</p>
+<p>Vous devriez maintenant pouvoir lancer les commandes suivantes</p>
+<pre><code language="language-bash" class="language-bash">cd myApp/
+ionic serve
+</code></pre>
+<p>Cette dernière commande va ouvrir votre projet dans votre navigateur.</p>
+<p class="image-container"><img alt="projet_blank" src="img/da1e4f4dc154343b.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lancer l&#39;application sur Android" duration="0">
+        <p>Pour qu&#39;il nous soit possible de build notre application, nous devons dire à Capacitor que notre application doit ajouter cette platform.</p>
+<pre><code language="language-bash" class="language-bash">ionic build # nécessaire seulement la première fois pour que le dossier www soit créé
+ionic capacitor add android
+</code></pre>
+<aside class="special"><p>Ajouter d&#39;autre platforme comme IOS par exemple ce fait de la même manière mais nous nous concentrerons sur android ici.</p>
+</aside>
+<p>Une fois cela fait, vous pouvez lancer votre application sur un device Android. Pour ce faire: Lancez les commandes suivantes</p>
+<pre><code language="language-bash" class="language-bash"># Va build notre app Angular dans le dossier &#34;www&#34;
+ionic build
+# Copie le contenu de notre app buildé dans l&#39;application Android
+ionic capacitor sync android
+</code></pre>
+<p>Vous pouvez maintenant lancer votre application depuis Android Studio avec le bouton &#34;Run App&#34; (En haut à droite dans la barre d&#39;outils)</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lancer l&#39;app en mode Live Reload" duration="0">
+        <p>C&#39;est bien beau tout ça mais si on doit le refaire chaque fois qu&#39;on fait un changement ça va vite être relou.</p>
+<p>C&#39;est pour ça qu&#39;on veut lancer notre app en mode &#34;Live Reload&#34; (C&#39;est à ça que va servir le package <code>native-run</code> que vous avez installé plus tôt avec NPM).</p>
+<p>Pour ça ce n&#39;est pas vraiment plus compliqué.</p>
+<p>Commencez par changer la propriété <code>server</code> dans le fichier <code>capacitor.config.json</code> pour y rajouter la propriété <code>"cleartext": true</code>.</p>
+<p>Exemple:</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;appId&#34;: &#34;io.ionic.starter&#34;,
+  &#34;appName&#34;: &#34;test-capacitor&#34;,
+  &#34;bundledWebRuntime&#34;: false,
+  &#34;npmClient&#34;: &#34;npm&#34;,
+  &#34;webDir&#34;: &#34;www&#34;,
+  &#34;plugins&#34;: {
+    &#34;SplashScreen&#34;: {
+      &#34;launchShowDuration&#34;: 0
+    }
+  },
+  &#34;cordova&#34;: {},
+  &#34;server&#34;: {
+    &#34;cleartext&#34;: true
+  }
+}
+</code></pre>
+<p>Maintenant vous avez deux choses à faire.</p>
+<ul>
+<li>Lancez cette commande</li>
+</ul>
+<pre><code language="language-bash" class="language-bash">ionic capacitor run android -l --external
+</code></pre>
+<ul>
+<li>Redémarrez ensuite votre application sur Android Studio. Vous devriez voir votre application démarrer avec une petite notification <code>Using app server xxxxxxx</code>.</li>
+</ul>
+<p><strong>Comment ça marche ?</strong></p>
+<p>La commande que vous avez lancé juste avant va ouvrir un serveur web sur lequel le téléphone se connecte pour recevoir les changements dès qu&#39;il sont enregistrés. De la même manière que le fait un <code>ionic serve</code> ou un <code>ng start</code> avec votre navigateur.</p>
+<aside class="warning"><p>Dans le cas d&#39;un simulateur nous n&#39;avons aucun problème vis à vis de ce serveur WEB car le simulateur utilise le réseau de votre ordinateur. Cependant dans le cas d&#39;un device physique, vous devez vous assurez que les deux périphériques (ordinateur et device Android) sont sur le même réseau.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Les composants de Ionic" duration="0">
+        <p>Ionic en lui même est très simple, souvenez vous en ! Ce n&#39;est ni plus ni moins qu&#39;un bootstrap moderne. La plupart du métier qui est exécuté au niveau natif de votre application (Création des platforme, build natif etc...) est fait par Capacitor.</p>
+<p>Partant de la vous savez que Ionic vous mettra à disposition beaucoup de composants graphique avec une apparence d&#39;application native, destinés à vous faciliter la tache.</p>
+<p>Vous pouvez en retrouver la liste sur la documentation avec pour chacun, une description détaillé de son mode d&#39;utilisation, de ses paramètre etc...</p>
+<p><a href="https://ionicframework.com/docs/components" target="_blank">Les composants Ionic</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Créer de de nouveaux components" duration="0">
+        <p>Ionic met à notre disposition une CLI puissante nous permettant de générer de nouveau écran facilement (De la même façon que angular avec <code>ng</code>).</p>
+<p>Vous pouvez en retrouver toute la documentation ici: <a href="https://ionicframework.com/docs/cli" target="_blank">https://ionicframework.com/docs/cli</a></p>
+<p>La commande qui nous intéresse ici est la commande <a href="https://ionicframework.com/docs/cli/commands/generate" target="_blank">generate</a></p>
+<pre><code language="language-bash" class="language-bash"># Exemple
+ionic generate page pages/photo-gallery
+ionic generate service services/photo/photo
+</code></pre>
+<aside class="special"><p>Servez vous en autant que possible pour générer vos composants. On vous met des outils entre les mains autant s&#39;en servir, Ils font une parti du boulot à votre place !</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ajouter un plugin dans notre app" duration="0">
+        <p>Pour ajouter un plugin à notre application, on passe une fois de plus par la <code>CLI</code>.</p>
+<p>Tous les plugins disponibles sont indiquez dans la documentation et décrivent les instructions d&#39;installation ainsi que les manières de les utiliser.</p>
+<p><a href="https://ionicframework.com/docs/native" target="_blank">Les plugins</a> (Dans notre cas, dans la partie &#34;Capacitor&#34;)</p>
+<aside class="warning"><p>Ne vous faites pas avoir. Le site propose des plugins &#34;Community&#34; ainsi que des plugins &#34;Entreprise&#34;. Les &#34;Entreprise&#34; font parti d&#39;un plan payant de Ionic que nous n&#39;utiliseront pas.</p>
+</aside>
+<p>Pour information le plugin que nous utilisont en cours est ici: <a href="https://capacitorjs.com/docs/apis/camera" target="_blank">Plugin Camera</a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

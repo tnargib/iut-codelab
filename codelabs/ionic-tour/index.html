@@ -29,15 +29,15 @@
     
       <google-codelab-step label="Initialisation" duration="0">
         <p>pour lancer un projet Ionic c&#39;est très simple. Allez dans le dossier qui vous intéresse et lancez la commande suivante.</p>
-<pre><code>ionic start myApp tabs
+<pre><code language="language-bash" class="language-bash">ionic start myApp blank
 </code></pre>
-<p>Si la CLI vous demande de choisir entre Angular et React, choisissez Angular. Si elle vous demande de choisir entre Cordova et Capacitor, choisissez Cordova.</p>
+<p>Si la CLI vous demande de choisir entre Angular et React, choisissez Angular. Si elle vous demande de choisir entre Cordova et Capacitor, choisissez Capacitor.</p>
 <p>Le processus va tourner quelques instants. Créer les fichiers et installer les dépendances avec npm.</p>
-<aside class="special"><p>Ionic nous met également à disposition plusieurs templates d&#39;app initial. Par exemple: <code>ionic start myApp blank</code></p>
+<aside class="special"><p>Ionic nous met également à disposition plusieurs templates d&#39;app initial. Par exemple: <code>ionic start myApp tabs</code></p>
 </aside>
 <p>Vous avez maintenant un projet ionic vide que vous pouvez lancer avec la commande suivante.</p>
 <p>Vous devriez maintenant pouvoir lancer les commandes suivantes</p>
-<pre><code>cd myApp/
+<pre><code language="language-bash" class="language-bash">cd myApp/
 ionic serve
 </code></pre>
 <p>Cette dernière commande va ouvrir votre projet dans votre navigateur.</p>
@@ -59,7 +59,7 @@ ionic serve
         <p>Ionic met à notre disposition une CLI puissante nous permettant de générer de nouveau écran facilement (De la même façon que angular avec <code>ng</code>).</p>
 <p>Vous pouvez en retrouver toute la documentation ici: <a href="https://ionicframework.com/docs/cli" target="_blank">https://ionicframework.com/docs/cli</a></p>
 <p>La commande qui nous intéresse ici est la commande <a href="https://ionicframework.com/docs/cli/commands/generate" target="_blank">generate</a></p>
-<pre><code># Exemple
+<pre><code language="language-bash" class="language-bash"># Exemple
 ionic generate page pages/photo-gallery
 ionic generate service services/photo/photo
 </code></pre>
@@ -74,21 +74,10 @@ ionic generate service services/photo/photo
 <p>Nous utilisons une commande de cordova réimplémenté dans la CLI de ionic.</p>
 <aside class="warning"><p>Ici il faut bien noter que c&#39;est Cordova qui va effectuer le travaille. La CLI de Ionic &#34;redirige&#34; juste la fonction par soucis de simplicité pour nous donner l&#39;impression que nous n&#39;utilisont qu&#39;une seule CLI.</p>
 </aside>
-<pre><code>ionic cordova platform add android
+<pre><code language="language-bash" class="language-bash">ionic cordova platform add android
 </code></pre>
 <aside class="special"><p>Ajouter d&#39;autre platforme comme IOS par exemple ce fait de la même manière mais nous nous concentrerons sur android ici.</p>
 </aside>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Ajouter un plugin dans notre app" duration="0">
-        <p>Pour ajouter un plugin à notre application, on passe une fois de plus par la <code>CLI</code>.</p>
-<p>Tous les plugins disponibles sont indiquez dans la documentation et décrivent les instructions d&#39;installation ainsi que les manières de les utiliser.</p>
-<p><a href="https://ionicframework.com/docs/native" target="_blank">Les plugins</a></p>
-<aside class="warning"><p>Ne vous faites pas avoir. Le site propose des plugins &#34;Community&#34; ainsi que des plugins &#34;Premier&#34;. Les &#34;Premier&#34; font parti d&#39;un plan payant de Ionic que nous n&#39;utiliseront pas.</p>
-</aside>
-<p>Pour information le plugin que nous utilisont en cours est ici: <a href="https://ionicframework.com/docs/native/camera" target="_blank">Plugin Camera</a></p>
 
 
       </google-codelab-step>
@@ -110,6 +99,7 @@ ionic generate service services/photo/photo
   <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
 
 </body>
 </html>

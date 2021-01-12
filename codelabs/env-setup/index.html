@@ -28,126 +28,97 @@
                   feedback-link="">
     
       <google-codelab-step label="Notes pour plus tard" duration="1">
-        <p>Attention: Toutes les étapes listées ici sont à réaliser sur votre machine. Et non pas sur votre serveur SSH. Autrement vous ne serez pas en mesure de détecter votre téléphone/tablette, une fois branché en USB.</p>
-<p>Pour éviter tous problèmes potentiels, lancez ces requêtes depuis votre home</p>
-<pre><code>cd ~
-</code></pre>
+        <aside class="warning"><p><strong>Attention:</strong> Toutes les étapes listées ici sont à réaliser <strong>sur votre machine</strong>. Et non pas sur votre serveur SSH. Autrement vous ne serez pas en mesure de détecter votre téléphone/tablette, une fois branché en USB.</p>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Prérequis" duration="1">
-        <p>Assurez vous que vous avez un fichier <code>.bash_profile</code> ou <code>.bashrc</code> à la racine de votre home.</p>
-<pre><code>$ ls -la ~
+        <p>Assurez vous que vous avez un fichier de configuration de shell <code>~/.bash_profile</code>, <code>~/.zshrc</code>, <code>~/.profile</code>, ou <code>~/.bashrc</code> à la racine de votre home.</p>
+<pre><code language="language-bash" class="language-bash">$ ls -la ~
 -rw-r--r-- 1 simonbrigant staff 3761 26 déc 11:58 .bash_profile
 </code></pre>
 <p>Si vous n&#39;avez aucun de ces deux fichiers. Lancez la commande suivante</p>
-<pre><code>touch ~/.bash_profile
+<pre><code language="language-bash" class="language-bash">touch ~/.bash_profile
 </code></pre>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Installation de NodeJS et NPM" duration="0">
-        <p>Vérifiez si vous avez node et npm d&#39;installer. Vous devriez avoir la version 10 de node (lts/dubnium)</p>
-<pre><code>$ node -v
+        <p>Vérifiez si vous avez node et npm d&#39;installer. Vous devriez avoir au moins la version 10 de node (lts/dubnium)</p>
+<pre><code language="language-bash" class="language-bash">$ node -v
 v10.17.0
 $ npm -v
 6.11.3
 </code></pre>
-<p>Si ce n&#39;est pas le cas, vous allez installer node avec <code>NVM</code> (Node Version Manager). Ce logiciel vous permet de gérer plusieurs version de node en même temps et vous assure que votre installation sera propre et sans problème de permission par exemple. C&#39;est toujours la manière recommandé d&#39;installer NodeJS.</p>
+<p>Si ce n&#39;est pas le cas, vous allez installer node avec <code>NVM</code> (Node Version Manager). Ce logiciel vous permet de gérer plusieurs version de node en même temps et vous assure que votre installation sera propre et sans problème de permission par exemple.</p>
+<p>C&#39;est toujours la manière recommandé d&#39;installer NodeJS !</p>
 <aside class="warning"><p>Pro tip: Si vous êtes obligé d&#39;utiliser sudo avec npm, dites vous que votre installation est foiré.</p>
 </aside>
 <h2 is-upgraded>Installer NVM</h2>
 <p>Lancer la commande suivante</p>
-<pre><code>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+<pre><code language="language-bash" class="language-bash">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 # Si vous n&#39;avez pas curl essayez avec wget
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 </code></pre>
-<p>Ouvrez un nouveau terminal ou lancez</p>
-<pre><code>source ~/.bash_profile
-# ou
-source ~/.bashrc
+<p>Ouvrez un nouveau terminal ou recharger la configuration de votre shell</p>
+<pre><code language="language-bash" class="language-bash">source ~/.bash_profile
+# ou selon votre shell: .bash_profile, .zshrc etc
 </code></pre>
 <p>Vous devriez pouvoir utiliser NVM</p>
-<pre><code>$ nvm --version
+<pre><code language="language-bash" class="language-bash">$ nvm --version
 0.33.11
 </code></pre>
-<p>Si ce n&#39;est pas le cas ajouter ceci à la fin de votre fichier .bash_profile ou .bashrc puis</p>
-<p>réouvrez un nouveau terminal ou faites un <code>source</code></p>
-<pre><code>export NVM_DIR=&#34;$([ -z &#34;${XDG_CONFIG_HOME-}&#34; ] &amp;&amp; printf %s &#34;${HOME}/.nvm&#34; || printf %s &#34;${XDG_CONFIG_HOME}/nvm&#34;)&#34;
+<p>Si ce n&#39;est pas le cas ajouter ceci à la fin de votre fichier .bash_profile ou .bashrc puis réouvrez un nouveau terminal ou faites un <code>source</code></p>
+<pre><code language="language-bash" class="language-bash">export NVM_DIR=&#34;$([ -z &#34;${XDG_CONFIG_HOME-}&#34; ] &amp;&amp; printf %s &#34;${HOME}/.nvm&#34; || printf %s &#34;${XDG_CONFIG_HOME}/nvm&#34;)&#34;
 [ -s &#34;$NVM_DIR/nvm.sh&#34; ] &amp;&amp; \. &#34;$NVM_DIR/nvm.sh&#34; # This loads nvm
 </code></pre>
 <p>Installez maintenant node et faites en votre version par defaut</p>
-<pre><code>nvm install --lts=Dubnium
-nvm alias default lts/dubnium
+<pre><code language="language-bash" class="language-bash">nvm install --lts
 $ nvm ls
 -&gt; v10.17.0
-default -&gt; lts/dubnium (-&gt; v10.17.0)
+default -&gt; lts/* (-&gt; v10.17.0)
 </code></pre>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Installer Java 8" duration="0">
-        <p>Vérifiez d&#39;abord votre installation de java: Ionic ne fonctionne pas avec les version plus récente de java. faites donc attention à ce que votre numéro de version corresponde à ceci (du moins pour le 1.8).</p>
-<pre><code>$ java -version
+        <aside class="warning"><p>C&#39;est une parti un peu tricky car Java 8 a été déprécié (Bien sur, personne ne demandera pourquoi diable travail t&#39;on encore avec alors) Si vous avez des soucis n&#39;hésitez surtout pas à me demander et surtout sur cette partie.</p>
+</aside>
+<p>Vérifiez d&#39;abord votre installation de java: Malheureusement pour nous, Ionic ne fonctionne pas avec les version plus récente de java. faites donc attention à ce que vous aillez le <strong>JDK8 (numéro de version 1.8).</strong></p>
+<pre><code language="language-bash" class="language-bash">$ java -version
 java version &#34;1.8.0_192&#34;
 Java(TM) SE Runtime Environment (build 1.8.0_192-b12)
 Java HotSpot(TM) 64-Bit Server VM (build 25.192-b12, mixed mode)
 </code></pre>
-<p>Si la version affiché est 11 ou 13, vous êtes sur une version trop récente de java. Suivez <a href="https://askubuntu.com/questions/1133216/downgrading-java-11-to-java-8" target="_blank">ces instructions</a> pour downgrade java.</p>
+<p>Si la version affiché est 11 ou 13, vous êtes sur une version trop récente de java, souvent installé par défaut. Suivez <a href="https://askubuntu.com/questions/1133216/downgrading-java-11-to-java-8" target="_blank">ces instructions</a> pour downgrade java.</p>
 <p>Dans le cas ou java ne serait pas installé, exécuter les commandes suivantes</p>
-<pre><code>sudo apt-get update
-sudo apt-get install default-jre
-sudo apt-get install default-jdk
+<pre><code language="language-bash" class="language-bash">sudo apt-get update
+sudo apt install openjdk-8-jdk
 </code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="installer Gradle" duration="0">
-        <p>Vérifiez d&#39;abord votre installation</p>
-<pre><code>$ gradle -v
-------------------------------------------------------------
-Gradle 6.0.1
-------------------------------------------------------------
-Build time: 2019-11-18 20:25:01 UTC
-Revision: fad121066a68c4701acd362daf4287a7c309a0f5
-Kotlin: 1.3.50
-Groovy: 2.5.8
-Ant: Apache Ant(TM) version 1.10.7 compiled on September 1 2019
-JVM: 1.8.0_192 (Oracle Corporation 25.192-b12)
-OS: Mac OS X 10.15.1 x86_64
-</code></pre>
-<p>Pour installer gradle on utilisera sdkman. Avant de l&#39;installer, vérifiez si vous l&#39;avez déjà:</p>
-<pre><code>$ sdk version
-sdkman 5.0.0+51
-</code></pre>
-<p>Si vous ne l&#39;avez pas, exécutez la commande suivante</p>
-<pre><code>curl -s &#34;https://get.sdkman.io&#34; | bash
-</code></pre>
-<p>Ajoutez ensuite cette ligne à la fin de votre <code>.bash_profile</code> ou <code>.bashrc</code></p>
-<pre><code>source &#34;$HOME/.sdkman/bin/sdkman-init.sh&#34;
-</code></pre>
-<p>Vous pouvez ensuite lancer un nouveau terminal ou lancer la commande</p>
-<pre><code>source ~/.bash_profile
-# ou
-source ~/.bashrc
-</code></pre>
-<p>Vous pouvez maintenant installer Gradle</p>
-<pre><code>sdk install gradle 6.1
+<p>Si cette methode ne marche pas vous pouvez tenter celle la, surtout si vous êtes sur Debian 10 qui n&#39;embarque plus certain repos.</p>
+<pre><code language="language-bash" class="language-bash">apt-get update
+apt-get install software-properties-common
+apt-add-repository &#39;deb http://security.debian.org/debian-security stretch/updates main&#39;
+apt-get update
+apt-get install openjdk-8-jdk
 </code></pre>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="installer Android studio" duration="0">
-        <p>Vous devrez installer Android Studio. Il ne sera pas utiliser pour coder mais nous fournira les outils nécessaire pour compiler, lancer notre app sur des devices ou créer des émulateurs.</p>
+        <p>Vous devrez installer Android Studio. Il ne sera pas utilisé pour coder mais nous fournira les outils nécessaire pour compiler, lancer notre app sur des devices ou créer des émulateurs.</p>
 <p><a href="https://developer.android.com/studio/" target="_blank">Android studio</a></p>
-<p>Vous devez ensuite installer les SDK nécessaires pour nos futures compilations. Ouvrez le SDK Manager d&#39;Android Studio. Si vous venez d&#39;installer Android Studio il devrait s&#39;afficher par défaut.</p>
-<p>Choisissez la version 9 (Pie) d&#39;Android (API 28) et installez la en prenant note de l&#39;emplacement de sauvegarde du SDK. Prenez note de l&#39;emplacement de sauvegarde des SDK et ajoutez ces lignes à votre <code>.bash_profile</code> ou <code>.bashrc</code> (Le chemin peut changer dépendant de votre OS).</p>
-<pre><code>export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+<p>Quand vous lancerez Android Studio, dites lui de garder la config de base qui sera suffisante pour nous. Ca téléchargera les sdks de base et un simulateur.</p>
+<p>Pour que les outils d&#39;Android soit utilisable par le shell (et donc par capacitor) vous devez renseigner leurs emplacements dans la configuration de votre shell. <strong>Ouvrez votre fichier .bash_profile ou autre</strong> avec nano ou ce que vous voulez.</p>
+<aside class="special"><p>Pour connaitre l&#39;emplacement des outils de dev d&#39;Android, ouvrez Android Studio et allez dans <code>Tools -> SDK Manager</code>. Puis copiez le chemin dans <code>Android SDK Location</code>.</p>
+</aside>
+<p>Prenez note de l&#39;emplacement de sauvegarde des SDK et ajoutez ces lignes à votre <code>.bash_profile</code> ou <code>.bashrc</code> (Le chemin peut changer dépendant de votre OS).</p>
+<pre><code language="language-bash" class="language-bash">export ANDROID_SDK_ROOT=/Users/simonbrigant/Library/Android/sdk
 # avdmanager, sdkmanager
 export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
 # adb, logcat
@@ -155,10 +126,10 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 # emulator
 </code></pre>
 <p>Ouvrez un nouveau terminal ou exécuter la commande</p>
-<pre><code>source ~/.bash_profile
+<pre><code language="language-bash" class="language-bash">source ~/.bash_profile
 </code></pre>
-<p>Vous devriez maintenant avoir accès à la commande &#34;adb&#34;. Tester la en listant les devices branché à votre ordinateur. Tant que vous n&#39;avez pas un truc du genre &#34;adb commande not found&#34; vous êtes bon.</p>
-<pre><code>adb devices
+<p>Vous devriez maintenant avoir accès à la commande &#34;adb&#34;. Tester la en listant les devices branché à votre ordinateur. Tant que vous n&#39;avez pas un truc du genre <code>adb commande not found</code> vous êtes bon.</p>
+<pre><code language="language-bash" class="language-bash">adb devices
 </code></pre>
 
 
@@ -166,17 +137,17 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
     
       <google-codelab-step label="Installation de Ionic" duration="0">
         <p>Pour installer ionic lancez simplement</p>
-<pre><code>npm i -g ionic cordova native-run cordova-res
+<pre><code language="language-bash" class="language-bash">npm i -g ionic native-run cordova-res
 </code></pre>
 <p>pour vérifier que tout est bien installer:</p>
-<pre><code>$ npm ls -g --depth=0
+<pre><code language="language-bash" class="language-bash">$ npm ls -g --depth=0
 /Users/simonbrigant/.nvm/versions/node/v10.17.0/lib
-├── cordova@9.0.0
-├── cordova-res@0.8.1
 ├── ionic@5.4.13
 ├── native-run@0.3.0
 └── npm@6.11.3
 </code></pre>
+<aside class="special"><p>Ne faites pas attention à native-run et cordova-res. Il nous serviront plus tard.</p>
+</aside>
 
 
       </google-codelab-step>
@@ -187,6 +158,7 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
   <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
   <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
 
 </body>
 </html>

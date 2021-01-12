@@ -106,7 +106,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div id="mainToolbar" class="paper-header">
       <div class="site-width layout horizontal">
         <a href="/">
-          <img src="/images/logo.png" class="logo-devs" alt="Codelabs Logo">
+          <img src="/images/Ionic_Logo.svg" class="logo-devs" alt="Codelabs Logo">
         </a>
         <div id="searchbar">
           <paper-input-container no-label-float>
@@ -160,7 +160,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </paper-tabs>
         </div>
 
-        {% if view.id == 'default' %}
+        {% if view.id == 'default' && views|length > 1 %}
         <paper-dropdown-menu label="Choose an event" class="dropdown-filter" no-label-float noink no-animations>
           <paper-listbox id="eventList" slot="dropdown-content" class="dropdown-content">
             {%- for view in views -%}
@@ -221,7 +221,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </main>
 
-    <footer id="footer">
+    <!-- <footer id="footer">
       <div class="footer-wrapper site-width">
         <div class="link-list">
           <label>Connect</label>
@@ -248,9 +248,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </ul>
         </div>
       </div>
-    </footer>
+    </footer> -->
 
-    <div class="footerbar">
+    <!-- <div class="footerbar">
       <div class="site-width layout horizontal center justified">
         <span>
           <a href="https://example.com">Terms</a>
@@ -258,7 +258,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <a href="https://example.com">Privacy</a>
         </span>
       </div>
-    </div>
+    </div> -->
 
   </paper-header-panel>
 

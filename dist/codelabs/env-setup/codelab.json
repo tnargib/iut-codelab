@@ -3,12 +3,12 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-01-28T00:39:11+01:00",
+  "updated": "2021-01-12T20:21:12+01:00",
   "id": "env-setup",
   "duration": 2,
   "title": "Setup de l'environnement",
   "authors": "Simon",
-  "summary": "Setup de l’environnement",
+  "summary": "Préparation de l’environnement",
   "source": "env-setup.md",
   "theme": "",
   "status": [
@@ -18,7 +18,7 @@
     "web"
   ],
   "tags": [
-    "medium"
+    "ionic"
   ],
   "url": "env-setup"
 }
