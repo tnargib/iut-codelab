@@ -100,39 +100,6 @@ default -> lts/* (-> v10.17.0)
 
 <!-- ------------------------ -->
 
-## Installer Java 8
-
-Negative
-: C'est une parti un peu tricky car Java 8 a été déprécié (Bien sur, personne ne demandera pourquoi diable travail t'on encore avec alors) Si vous avez des soucis n'hésitez surtout pas à me demander et surtout sur cette partie.
-
-Vérifiez d’abord votre installation de java: Malheureusement pour nous, Ionic ne fonctionne pas avec les version plus récente de java. faites donc attention à ce que vous aillez le **JDK8 (numéro de version 1.8).**
-
-```bash
-$ java -version
-java version "1.8.0_192"
-Java(TM) SE Runtime Environment (build 1.8.0_192-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.192-b12, mixed mode)
-```
-
-> Si la version affiché est 11 ou 13, vous êtes sur une version trop récente de java, souvent installé par défaut. Suivez [ces instructions](https://askubuntu.com/questions/1133216/downgrading-java-11-to-java-8) pour downgrade java.
-
-Dans le cas ou java ne serait pas installé, exécuter les commandes suivantes
-
-```bash
-sudo apt-get update
-sudo apt install openjdk-8-jdk
-```
-
-Si cette methode ne marche pas vous pouvez tenter celle la, surtout si vous êtes sur Debian 10 qui n'embarque plus certain repos.
-
-```bash
-apt-get update
-apt-get install software-properties-common
-apt-add-repository 'deb http://security.debian.org/debian-security stretch/updates main'
-apt-get update
-apt-get install openjdk-8-jdk
-```
-
 ## installer Android studio
 
 Vous devrez installer Android Studio. Il ne sera pas utilisé pour coder mais nous fournira les outils nécessaire pour compiler, lancer notre app sur des devices ou créer des émulateurs.
@@ -176,7 +143,7 @@ adb devices
 Pour installer ionic lancez simplement
 
 ```bash
-npm i -g ionic native-run cordova-res
+npm i -g @ionic/cli native-run cordova-res
 ```
 
 pour vérifier que tout est bien installer:
@@ -191,3 +158,46 @@ $ npm ls -g --depth=0
 
 Positive
 : Ne faites pas attention à native-run et cordova-res. Il nous serviront plus tard.
+
+<!-- ------------------------ -->
+
+## Installation Windows avec WSL
+
+Negative
+: Bien que cette solution semble intéressante, elle apporte tout de même sont lot de complication (A commencé par l'installation). Aussi je vous conseille vivement dans la mesure du possible d'installer Node directement sur votre Windows. Si votre installation de Node est bancale, désinstallez - réinstallé le. NodeJS est un logiciel comme un autre, des package NPM ça se réinstalle en un tour de bras !
+
+Si vous préférez, il vous est possible d'effectuer les étapes listées ci dessus depuis une vrai distribution Linux grâce à la fonction de sous système Linux pour Windows.
+
+Pour ce faire installez WSL sur votre ordianteur en suivant les instructions listées ici : <https://docs.microsoft.com/fr-fr/windows/wsl/install-win10> puis installez votre distribution Linux. (On conseillera généralement Ubuntu pour rester sur un système standard et largement documenté)
+
+Vous avez ensuite quelques manipulations à faire pour rendre certain de vos outils windows disponible sous Linux.
+
+### Dans votre Windows
+
+Vous allez devoir créer 2 variables d'environnements pour les passer ensuite à votre environnement WSL.
+
+- ANDROID_SDK_ROOT: La localisation de vos outils de dévelopement Android. (Le chemin qui vous est indiqué dans Android Studio). `Ex: C:\Users\simon\AppData\Local\Android\Sdk`.
+<!-- - ANDROID_STUDIO_ROOT: Le chemin vers le dossier d'installation de Android Studio. `Ex: C:\Program Files\Android\Android Studio\bin`. -->
+- WSL_SHARED: Le chemin vers un dossier que vous allez partager entre vos deux distributions (Vous devriez de préférence créer un nouveau dossier spécifique pour ça plutôt que d'en réutiliser un existant, pour éviter les conneries). `Dans mon cas: D:\sharedwsl`.
+
+Vous allez maintenant devoir créer une dernière variable d'environnement qui va permettre de partager ces dernières avec votre distribution Linux.
+
+`WSLENV: WSL_SHARED/p:ANDROID_SDK_ROOT/p`
+
+Positive
+: le `/p` ici est important. Il va indiquer à Windows qu'il faut "traduire" ces variables pour Linux. Pas de `\` en linux par exemple.
+
+### Dans votre ditribution Linux
+
+Créez ensuite à la racine de votre home un dossier `SharedWSL` qui sera un raccourci vers le dossier que vous avez créer sur votre windows.
+
+```bash
+ln -s $WSL_SHARED SharedWSL
+```
+
+Vosu pouvez maintenant cd dans ce dossier, et vous vérez que si vous créez des fichier dedans depuis votre Linux, il apparaitront dedans sous Windows également.
+
+Vous pouvez maintenant, dans votre Linux, installer Node + Ionic et lancer votre ionic start dans le dossier SharedWSL.
+
+Negative
+: Le Live Reload ne marchera sur un environnement comme celui la. Par conséquent vous ne pouvez pas utiliser les commandes `ionic capacitor run ...` et `ionic capacitor open ...`. Par conséquent, à chaque fois que vous voudrez voir les changement que vous avez fait à votre app vous devrez lancer un `ionic capacitor copy android` voir un `ionic capacitor sync android`.

@@ -85,31 +85,6 @@ default -&gt; lts/* (-&gt; v10.17.0)
 
       </google-codelab-step>
     
-      <google-codelab-step label="Installer Java 8" duration="0">
-        <aside class="warning"><p>C&#39;est une parti un peu tricky car Java 8 a été déprécié (Bien sur, personne ne demandera pourquoi diable travail t&#39;on encore avec alors) Si vous avez des soucis n&#39;hésitez surtout pas à me demander et surtout sur cette partie.</p>
-</aside>
-<p>Vérifiez d&#39;abord votre installation de java: Malheureusement pour nous, Ionic ne fonctionne pas avec les version plus récente de java. faites donc attention à ce que vous aillez le <strong>JDK8 (numéro de version 1.8).</strong></p>
-<pre><code language="language-bash" class="language-bash">$ java -version
-java version &#34;1.8.0_192&#34;
-Java(TM) SE Runtime Environment (build 1.8.0_192-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.192-b12, mixed mode)
-</code></pre>
-<p>Si la version affiché est 11 ou 13, vous êtes sur une version trop récente de java, souvent installé par défaut. Suivez <a href="https://askubuntu.com/questions/1133216/downgrading-java-11-to-java-8" target="_blank">ces instructions</a> pour downgrade java.</p>
-<p>Dans le cas ou java ne serait pas installé, exécuter les commandes suivantes</p>
-<pre><code language="language-bash" class="language-bash">sudo apt-get update
-sudo apt install openjdk-8-jdk
-</code></pre>
-<p>Si cette methode ne marche pas vous pouvez tenter celle la, surtout si vous êtes sur Debian 10 qui n&#39;embarque plus certain repos.</p>
-<pre><code language="language-bash" class="language-bash">apt-get update
-apt-get install software-properties-common
-apt-add-repository &#39;deb http://security.debian.org/debian-security stretch/updates main&#39;
-apt-get update
-apt-get install openjdk-8-jdk
-</code></pre>
-
-
-      </google-codelab-step>
-    
       <google-codelab-step label="installer Android studio" duration="0">
         <p>Vous devrez installer Android Studio. Il ne sera pas utilisé pour coder mais nous fournira les outils nécessaire pour compiler, lancer notre app sur des devices ou créer des émulateurs.</p>
 <p><a href="https://developer.android.com/studio/" target="_blank">Android studio</a></p>
@@ -137,7 +112,7 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
     
       <google-codelab-step label="Installation de Ionic" duration="0">
         <p>Pour installer ionic lancez simplement</p>
-<pre><code language="language-bash" class="language-bash">npm i -g ionic native-run cordova-res
+<pre><code language="language-bash" class="language-bash">npm i -g @ionic/cli native-run cordova-res
 </code></pre>
 <p>pour vérifier que tout est bien installer:</p>
 <pre><code language="language-bash" class="language-bash">$ npm ls -g --depth=0
@@ -147,6 +122,34 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 └── npm@6.11.3
 </code></pre>
 <aside class="special"><p>Ne faites pas attention à native-run et cordova-res. Il nous serviront plus tard.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Installation Windows avec WSL" duration="0">
+        <aside class="warning"><p>Bien que cette solution semble intéressante, elle apporte tout de même sont lot de complication (A commencé par l&#39;installation). Aussi je vous conseille vivement dans la mesure du possible d&#39;installer Node directement sur votre Windows. Si votre installation de Node est bancale, désinstallez - réinstallé le. NodeJS est un logiciel comme un autre, des package NPM ça se réinstalle en un tour de bras !</p>
+</aside>
+<p>Si vous préférez, il vous est possible d&#39;effectuer les étapes listées ci dessus depuis une vrai distribution Linux grâce à la fonction de sous système Linux pour Windows.</p>
+<p>Pour ce faire installez WSL sur votre ordianteur en suivant les instructions listées ici : <a href="https://docs.microsoft.com/fr-fr/windows/wsl/install-win10" target="_blank">https://docs.microsoft.com/fr-fr/windows/wsl/install-win10</a> puis installez votre distribution Linux. (On conseillera généralement Ubuntu pour rester sur un système standard et largement documenté)</p>
+<p>Vous avez ensuite quelques manipulations à faire pour rendre certain de vos outils windows disponible sous Linux.</p>
+<h2 is-upgraded>Dans votre Windows</h2>
+<p>Vous allez devoir créer 2 variables d&#39;environnements pour les passer ensuite à votre environnement WSL.</p>
+<ul>
+<li>ANDROID_SDK_ROOT: La localisation de vos outils de dévelopement Android. (Le chemin qui vous est indiqué dans Android Studio). <code>Ex: C:\Users\simon\AppData\Local\Android\Sdk</code>. </li>
+<li>WSL_SHARED: Le chemin vers un dossier que vous allez partager entre vos deux distributions (Vous devriez de préférence créer un nouveau dossier spécifique pour ça plutôt que d&#39;en réutiliser un existant, pour éviter les conneries). <code>Dans mon cas: D:\sharedwsl</code>.</li>
+</ul>
+<p>Vous allez maintenant devoir créer une dernière variable d&#39;environnement qui va permettre de partager ces dernières avec votre distribution Linux.</p>
+<p><code>WSLENV: WSL_SHARED/p:ANDROID_SDK_ROOT/p</code></p>
+<aside class="special"><p>le <code>/p</code> ici est important. Il va indiquer à Windows qu&#39;il faut &#34;traduire&#34; ces variables pour Linux. Pas de <code>\</code> en linux par exemple.</p>
+</aside>
+<h2 is-upgraded>Dans votre ditribution Linux</h2>
+<p>Créez ensuite à la racine de votre home un dossier <code>SharedWSL</code> qui sera un raccourci vers le dossier que vous avez créer sur votre windows.</p>
+<pre><code language="language-bash" class="language-bash">ln -s $WSL_SHARED SharedWSL
+</code></pre>
+<p>Vosu pouvez maintenant cd dans ce dossier, et vous vérez que si vous créez des fichier dedans depuis votre Linux, il apparaitront dedans sous Windows également.</p>
+<p>Vous pouvez maintenant, dans votre Linux, installer Node + Ionic et lancer votre ionic start dans le dossier SharedWSL.</p>
+<aside class="warning"><p>Le Live Reload ne marchera sur un environnement comme celui la. Par conséquent vous ne pouvez pas utiliser les commandes <code>ionic capacitor run ...</code> et <code>ionic capacitor open ...</code>. Par conséquent, à chaque fois que vous voudrez voir les changement que vous avez fait à votre app vous devrez lancer un <code>ionic capacitor copy android</code> voir un <code>ionic capacitor sync android</code>.</p>
 </aside>
 
 
