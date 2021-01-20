@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "7.0.0",
+  "version": "8.0.0",
   "scripts": {
     "start": "gulp serve --codelabs-dir=codelabs",
     "deploy": "./gh-deploy.sh"
